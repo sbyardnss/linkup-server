@@ -5,6 +5,7 @@
         "fields": {
             "sender": 2,
             "recipient": 1,
+            "date_time": "2023-05-10T16:09:23.160Z",
             "message": "You're so good at golf",
             "read": true
         }
@@ -15,6 +16,7 @@
         "fields": {
             "sender": 1,
             "recipient": 2,
+            "date_time": "2023-05-10T16:09:23.160Z",
             "message": "I know",
             "read": false
         }
