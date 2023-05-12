@@ -1,0 +1,22 @@
+[
+    {
+        "model": "linkupapi.course",
+        "pk": 1,
+        "fields": {
+            "name": "Two Rivers Golf Course",
+            "address": "2235 Two Rivers Pkwy, Nashville, TN 37214",
+            "phone_number": "(615) 889-2675",
+            "url": "https://www.nashville.gov/departments/parks/golf-courses/two-rivers-golf-course"
+        }
+    },
+    {
+        "model": "linkupapi.course",
+        "pk": 2,
+        "fields": {
+            "name": "Riverside Golf Course",
+            "address": "640 Old Hickory Blvd, Old Hickory, TN 37138",
+            "phoneNumber": "(615) 847-5074",
+            "url": "https://riversidegolflinks.com/"
+        }
+    }
+]

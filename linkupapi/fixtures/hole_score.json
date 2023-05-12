@@ -1,0 +1,362 @@
+[
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 1,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 2,
+            "course_hole": 1,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 2,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 5,
+            "course_hole": 2,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 3,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 6,
+            "course_hole": 3,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 4,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 3,
+            "course_hole": 4,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 5,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 4,
+            "course_hole": 5,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 6,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 4,
+            "course_hole": 6,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 7,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 2,
+            "course_hole": 7,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 8,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 5,
+            "course_hole": 8,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 9,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 4,
+            "course_hole": 9,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 10,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 6,
+            "course_hole": 10,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 11,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 5,
+            "course_hole": 11,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 12,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 4,
+            "course_hole": 12,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 13,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 6,
+            "course_hole": 13,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 14,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 2,
+            "course_hole": 14,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 15,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 10,
+            "course_hole": 15,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 16,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 7,
+            "course_hole": 16,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 17,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 10,
+            "course_hole": 17,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 18,
+        "fields": {
+            "golfer_match": 1,
+            "strokes": 4,
+            "course_hole": 18,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 19,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 3,
+            "course_hole": 1,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 20,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 4,
+            "course_hole": 2,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 21,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 6,
+            "course_hole": 3,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 22,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 3,
+            "course_hole": 4,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 23,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 3,
+            "course_hole": 5,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 24,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 6,
+            "course_hole": 6,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 25,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 3,
+            "course_hole": 7,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 26,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 5,
+            "course_hole": 8,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 27,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 5,
+            "course_hole": 9,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 28,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 4,
+            "course_hole": 10,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 29,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 3,
+            "course_hole": 11,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 30,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 4,
+            "course_hole": 12,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 31,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 3,
+            "course_hole": 13,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 32,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 5,
+            "course_hole": 14,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 33,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 10,
+            "course_hole": 15,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 34,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 5,
+            "course_hole": 16,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 35,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 12,
+            "course_hole": 17,
+            "notes": ""
+        }
+    },
+    {
+        "model": "linkupapi.hole_score",
+        "pk": 36,
+        "fields": {
+            "golfer_match": 2,
+            "strokes": 6,
+            "course_hole": 18,
+            "notes": ""
+        }
+    }
+]

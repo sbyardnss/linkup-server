@@ -1,0 +1,38 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "byard",
+            "last_login": null,
+            "is_superuser": false,
+            "username": null,
+            "first_name": "Stephen",
+            "last_name": "Byard",
+            "email": "stephen@byard.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-05-11T21:19:25.057Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "woods",
+            "last_login": null,
+            "is_superuser": false,
+            "username": null,
+            "first_name": "Tiger",
+            "last_name": "Woods",
+            "email": "tiger@woods.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-05-11T21:19:25.057Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]

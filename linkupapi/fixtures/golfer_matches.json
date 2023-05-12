@@ -1,0 +1,20 @@
+[
+    {
+        "model": "linkupapi.golfer_match",
+        "pk": 1,
+        "fields": {
+            "match": 1,
+            "golfer": 1,
+            "isInitiator": true
+        }
+    },
+    {
+        "model": "linkupapi.golfer_match",
+        "pk": 2,
+        "fields": {
+            "match": 1,
+            "golfer": 2,
+            "isInitiator": false
+        }
+    }
+]

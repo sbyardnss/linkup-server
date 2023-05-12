@@ -1,0 +1,22 @@
+[
+    {
+        "model": "linkupapi.message",
+        "pk": 1,
+        "fields": {
+            "sender": 2,
+            "recipient": 1,
+            "message": "You're so good at golf",
+            "read": true
+        }
+    },
+    {
+        "model": "linkupapi.message",
+        "pk": 2,
+        "fields": {
+            "sender": 1,
+            "recipient": 2,
+            "message": "I know",
+            "read": false
+        }
+    }
+]

@@ -1,0 +1,16 @@
+[
+    {
+        "model": "linkupapi.golfer",
+        "pk": 1,
+        "fields": {
+            "user": 1
+        }
+    },
+    {
+        "model": "linkupapi.golfer",
+        "pk": 2,
+        "fields": {
+            "user": 2
+        }
+    }
+]

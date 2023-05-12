@@ -1,0 +1,12 @@
+[
+    {
+        "model": "linkupapi.match",
+        "pk": 1,
+        "fields": {
+            "creator": 1,
+            "date_time": "2023-06-18T16:09:23.160Z",
+            "course": 1,
+            "message": "Let's have fun"
+        }
+    }
+]
