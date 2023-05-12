@@ -1,0 +1,1 @@
+from .golfer import GolferView
