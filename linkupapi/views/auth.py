@@ -50,7 +50,8 @@ def register_user(request):
         username=request.data['username'],
         email=request.data['email'],
         password=request.data['password'],
-        name=request.data['name'],
+        first_name=request.data['first_name'],
+        last_name=request.data['last_name']
     )
     # Now save the extra info in the levelupapi_gamer table
     golfer = Golfer.objects.create(
