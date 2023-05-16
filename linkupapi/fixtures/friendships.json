@@ -1,0 +1,11 @@
+[
+    {
+        "model": "linkupapi.friendship",
+        "pk": 1,
+        "fields": {
+            "golfer": 1,
+            "friend": 2,
+            "created_on": "2023-05-12T21:19:25.057Z"
+        }
+    }
+]
