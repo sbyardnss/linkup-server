@@ -9,8 +9,8 @@ from linkupapi.models import Match, Golfer, Course, GolferMatch
 class MatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
-        fields = ('id', 'creator', 'golfers', 'course', 'date_time', 'message')
-
+        fields = ('id', 'creator', 'course', 'date_time', 'message', 'players')
+        depth = 1
 
 class CreateMatchSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,10 +26,14 @@ class CreateGolferMatchSerializer(serializers.ModelSerializer):
 
 class MatchView(ViewSet):
     def list(self, request):
-        matches = Match.objects.all()
-        serialized = MatchSerializer(matches, many=True)
-        return Response(serialized.data, status=status.HTTP_200_OK)
-
+        try:
+            matches = Match.objects.all()
+            if "my_matches" in request.query_params:
+                matches = matches.filter(players=request.query_params['my_matches'])
+            serialized = MatchSerializer(matches, many=True)
+            return Response(serialized.data, status=status.HTTP_200_OK)
+        except Match.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     def retrieve(self, request, pk=None):
         match = Match.objects.get(pk=pk)
         serialized = MatchSerializer(match, many=False)
@@ -38,10 +42,6 @@ class MatchView(ViewSet):
     def create(self, request):
         golfer = Golfer.objects.get(user=request.auth.user)
         course = Course.objects.get(pk=request.data['courseId'])
-        # match = Match()
-        # match.creator = golfer
-        # match.course = course
-        # match.message = request.data['message']
         serialized = CreateMatchSerializer(data=request.data)
         serialized.is_valid(raise_exception=True)
         serialized.save(creator=golfer, course=course)

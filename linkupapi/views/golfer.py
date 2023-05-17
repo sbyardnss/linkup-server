@@ -29,6 +29,8 @@ class GolferView(ViewSet):
     def list(self, request):
         """handle list request for golfers"""
         golfers = Golfer.objects.all()
+        if "friends" in request.query_params:
+            golfers = golfers.filter(friendships = request.query_params['friends'])
         serialized = GolferSerializer(golfers, many=True)
         return Response(serialized.data)
     

@@ -12,21 +12,24 @@ from linkupapi.models import Golfer
 @permission_classes([AllowAny])
 def login_user(request):
     '''Handles the authentication of a gamer
-
+    
     Method arguments:
     request -- The full HTTP request object
     '''
-    email = request.data['email']
+    print(request.data)
+    username = request.data['username']
     password = request.data['password']
     # Use the built-in authenticate method to verify
     # authenticate returns the user object or None if no user is found
-    authenticated_user = authenticate(email=email, password=password)
+    authenticated_user = authenticate(username=username, password=password)
     # If authentication was successful, respond with their token
     if authenticated_user is not None:
         token = Token.objects.get(user=authenticated_user)
+        golfer = Golfer.objects.get(user = authenticated_user)
         data = {
             'valid': True,
-            'token': token.key
+            'token': token.key,
+            'userId': golfer.id
         }
         return Response(data)
     else:
