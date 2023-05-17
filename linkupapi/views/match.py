@@ -9,13 +9,13 @@ from linkupapi.models import Match, Golfer, Course, GolferMatch
 class MatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
-        fields = ('id', 'creator', 'course', 'date_time', 'message', 'players')
+        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'players')
         depth = 1
 
 class CreateMatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
-        fields = ['id', 'date_time', 'message']
+        fields = ['id', 'date', 'time', 'message']
 
 
 class CreateGolferMatchSerializer(serializers.ModelSerializer):
@@ -29,6 +29,7 @@ class MatchView(ViewSet):
         try:
             matches = Match.objects.all()
             if "my_matches" in request.query_params:
+                # THE LINE BELOW IS NOT WORKING CORRECTLY. CURRENTLY RETURNING THE MATCHES WITH A USERMATCH THAT MATCHES. NOT THE PLAYER
                 matches = matches.filter(players=request.query_params['my_matches'])
             serialized = MatchSerializer(matches, many=True)
             return Response(serialized.data, status=status.HTTP_200_OK)
@@ -40,6 +41,8 @@ class MatchView(ViewSet):
         return Response(serialized.data, status=status.HTTP_200_OK)
 
     def create(self, request):
+        print(request)
+        print(request.data)
         golfer = Golfer.objects.get(user=request.auth.user)
         course = Course.objects.get(pk=request.data['courseId'])
         serialized = CreateMatchSerializer(data=request.data)
