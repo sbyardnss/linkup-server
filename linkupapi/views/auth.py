@@ -42,13 +42,13 @@ def login_user(request):
 @permission_classes([AllowAny])
 def register_user(request):
     '''Handles the creation of a new gamer for authentication
-
+    
     Method arguments:
     request -- The full HTTP request object
     '''
+    
     # Create a new user by invoking the `create_user` helper method
     # on Django's built-in User model
-    # print(request.data)
     new_user = User.objects.create_user(
         username=request.data['username'],
         email=request.data['email'],
@@ -63,5 +63,9 @@ def register_user(request):
     # Use the REST Framework's token generator on the new user account
     token = Token.objects.create(user=golfer.user)
     # Return the token to the client
-    data = {'token': token.key}
+    data = {
+        'valid': True,
+        'token': token.key,
+        'userId': golfer.id
+    }
     return Response(data)

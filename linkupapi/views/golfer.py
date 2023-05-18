@@ -10,7 +10,7 @@ class GolferSerializer(serializers.ModelSerializer):
     """serializer for golfer requests"""
     class Meta:
         model = Golfer
-        fields = ('id', 'full_name', 'matches', 'my_friends')
+        fields = ('id', 'user', 'full_name', 'matches', 'my_friends')
 
 class CreateFriendshipSerializer(serializers.ModelSerializer):
     """serializer for creating friendships"""
@@ -29,8 +29,11 @@ class GolferView(ViewSet):
     def list(self, request):
         """handle list request for golfers"""
         golfers = Golfer.objects.all()
+        print(request)
         if "friends" in request.query_params:
             golfers = golfers.filter(friendships = request.query_params['friends'])
+        if "email" in request.query_params:
+            golfers = golfers.filter(user__email__exact=request.query_params['email'])
         serialized = GolferSerializer(golfers, many=True)
         return Response(serialized.data)
     

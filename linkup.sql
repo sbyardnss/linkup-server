@@ -1,2 +1,2 @@
-DELETE FROM linkupapi_golfermatch
-Where id > 3
+DELETE FROM linkupapi_golfer
+Where id > 4
