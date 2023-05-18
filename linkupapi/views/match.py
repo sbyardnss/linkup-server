@@ -29,8 +29,7 @@ class MatchView(ViewSet):
         try:
             matches = Match.objects.all()
             if "my_matches" in request.query_params:
-                # THE LINE BELOW IS NOT WORKING CORRECTLY. CURRENTLY RETURNING THE MATCHES WITH A USERMATCH THAT MATCHES. NOT THE PLAYER
-                matches = matches.filter(players=request.query_params['my_matches'])
+                matches = matches.filter(players__golfer__id=request.query_params['my_matches'])
             serialized = MatchSerializer(matches, many=True)
             return Response(serialized.data, status=status.HTTP_200_OK)
         except Match.DoesNotExist as ex:
