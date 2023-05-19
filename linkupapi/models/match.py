@@ -8,3 +8,9 @@ class Match(models.Model):
     date=models.DateField(null=False, auto_now=False, auto_now_add=False, default=date.today)
     time=models.TimeField(null=False, auto_now=False, auto_now_add=False, default=now)
     message=models.CharField(max_length=50, null=True, blank=True)
+    @property
+    def joined(self):
+        return self.__joined
+    @joined.setter
+    def joined(self, value):
+        self.__joined = value

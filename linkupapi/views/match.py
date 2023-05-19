@@ -3,6 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.decorators import action
+from django.db.models import Count, Q
 from linkupapi.models import Match, Golfer, Course, GolferMatch
 
 class GolferOnMatchSerializer(serializers.ModelSerializer):
@@ -14,7 +15,7 @@ class MatchSerializer(serializers.ModelSerializer):
     golfers = GolferOnMatchSerializer(many=True)
     class Meta:
         model = Match
-        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers', 'players')
+        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers', 'joined')
         depth = 1
 
 class CreateMatchSerializer(serializers.ModelSerializer):
@@ -29,14 +30,15 @@ class CreateGolferMatchSerializer(serializers.ModelSerializer):
         fields = ['id', 'golfer', 'match', 'is_initiator']
 
 
-
-
 class MatchView(ViewSet):
     def list(self, request):
+        active_golfer = Golfer.objects.get(user=request.auth.user)
         try:
-            matches = Match.objects.all()
-            if "my_matches" in request.query_params:
-                matches = matches.filter(golfers__user__id=request.auth.user.id)
+            matches = Match.objects.annotate(joined=Count('golfers', filter=Q(golfers=active_golfer)))
+            # if "my_matches" in request.query_params:
+            #     matches = matches.filter(golfers__user__id=request.auth.user.id)
+            # if "open_matches" in request.query_params:
+            #     matches = matches.filter(joined=0)
             serialized = MatchSerializer(matches, many=True)
             return Response(serialized.data, status=status.HTTP_200_OK)
         except Match.DoesNotExist as ex:
@@ -47,21 +49,11 @@ class MatchView(ViewSet):
         return Response(serialized.data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        print(request)
-        print(request.data)
         golfer = Golfer.objects.get(user=request.auth.user)
         course = Course.objects.get(pk=request.data['courseId'])
         serialized = CreateMatchSerializer(data=request.data)
         serialized.is_valid(raise_exception=True)
-        serialized.save(creator=golfer, course=course)
-        golf_match_data = {
-            'golfer': golfer.id,
-            'match': serialized.data['id'],
-            'is_initiator': 1
-        }
-        golfer_match = CreateGolferMatchSerializer(data=golf_match_data)
-        golfer_match.is_valid(raise_exception=True)
-        golfer_match.save()
+        serialized.save(creator=golfer, course=course, golfers=[golfer])
         return Response(serialized.data, status=status.HTTP_201_CREATED)
 
     def destroy(self, request, pk=None):
@@ -74,19 +66,27 @@ class MatchView(ViewSet):
         """post request for user to join other's tee time"""
         golfer = Golfer.objects.get(user=request.auth.user)
         match = Match.objects.get(pk=pk)
-        golfer_match = {
-            'golfer': golfer.id,
-            'match': match.id,
-            'is_initiator': 0
-        }
-        golfer_match = CreateGolferMatchSerializer(data=golfer_match)
-        golfer_match.is_valid(raise_exception=True)
-        golfer_match.save()
+        match.golfers.add(golfer)
         return Response({'message': 'tee time joined'}, status=status.HTTP_201_CREATED)
     @action(methods=['delete'], detail=True)
     def leave_tee_time(self, request, pk):
         """delete request to leave other's tee time"""
         golfer= Golfer.objects.get(user=request.auth.user)
-        golfer_match = GolferMatch.objects.get(golfer=golfer, match=pk)
-        golfer_match.delete()
-        return Response({'message': 'tee time bailed'})
+        match = Match.objects.get(pk=pk)
+        match.golfers.remove(golfer)
+        return Response({'message': 'tee time bailed'}, status=status.HTTP_204_NO_CONTENT)
+    @action(methods=['get'], detail=False)
+    def open(self, request):
+        active_golfer= Golfer.objects.get(user=request.auth.user)
+        matches = Match.objects.annotate(joined=Count('golfers', filter=Q(golfers=active_golfer)))
+        matches = matches.filter(joined=0)
+        serialized=MatchSerializer(matches, many=True)
+        return Response(serialized.data, status=status.HTTP_200_OK)
+    @action(methods=['get'], detail=False)
+    def joined(self, request):
+        active_golfer= Golfer.objects.get(user=request.auth.user)
+        matches = Match.objects.annotate(joined=Count('golfers', filter=Q(golfers=active_golfer)))
+        matches = matches.filter(joined=1)
+        serialized=MatchSerializer(matches, many=True)
+        return Response(serialized.data, status=status.HTTP_200_OK)
+

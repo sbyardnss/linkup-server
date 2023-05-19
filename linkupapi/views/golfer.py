@@ -7,14 +7,17 @@ from datetime import datetime
 from django.db.models import Count, Q
 from linkupapi.models import Golfer, Match
 
-
+class MyMatchesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Match
+        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers', 'players')
 class GolferSerializer(serializers.ModelSerializer):
     """serializer for golfer requests"""
+    my_matches = MyMatchesSerializer(many=True)
     class Meta:
         model = Golfer
         fields = ('id', 'user', 'full_name',
                   'my_matches', 'followers', 'friends', 'is_friend')
-
 # class CreateFriendshipSerializer(serializers.ModelSerializer):
 #     """serializer for creating friendships"""
 #     class Meta:
