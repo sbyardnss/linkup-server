@@ -9,7 +9,7 @@ from linkupapi.models import Match, Golfer, Course, GolferMatch
 class MatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
-        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'players')
+        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers')
         depth = 1
 
 class CreateMatchSerializer(serializers.ModelSerializer):
@@ -29,7 +29,7 @@ class MatchView(ViewSet):
         try:
             matches = Match.objects.all()
             if "my_matches" in request.query_params:
-                matches = matches.filter(players__golfer__id=request.query_params['my_matches'])
+                matches = matches.filter(golfers__user__id=request.auth.user.id)
             serialized = MatchSerializer(matches, many=True)
             return Response(serialized.data, status=status.HTTP_200_OK)
         except Match.DoesNotExist as ex:

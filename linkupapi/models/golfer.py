@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Golfer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField('Golfer', related_name='followers')
+    matches = models.ManyToManyField('Match', related_name='players')
     @property
     def full_name(self):
         """full name custom property"""

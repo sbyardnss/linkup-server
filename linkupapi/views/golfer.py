@@ -5,7 +5,7 @@ from rest_framework import serializers, status
 from rest_framework.decorators import action
 from datetime import datetime
 from django.db.models import Count, Q
-from linkupapi.models import Golfer, GolferMatch, Match
+from linkupapi.models import Golfer, Match
 
 
 class GolferSerializer(serializers.ModelSerializer):
