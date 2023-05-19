@@ -13,7 +13,7 @@ class GolferSerializer(serializers.ModelSerializer):
     class Meta:
         model = Golfer
         fields = ('id', 'user', 'full_name',
-                  'matches', 'followers', 'friends', 'is_friend')
+                  'my_matches', 'followers', 'friends', 'is_friend')
 
 # class CreateFriendshipSerializer(serializers.ModelSerializer):
 #     """serializer for creating friendships"""

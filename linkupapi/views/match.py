@@ -5,11 +5,16 @@ from rest_framework import serializers, status
 from rest_framework.decorators import action
 from linkupapi.models import Match, Golfer, Course, GolferMatch
 
+class GolferOnMatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Golfer
+        fields = ('id', 'full_name')
 
 class MatchSerializer(serializers.ModelSerializer):
+    golfers = GolferOnMatchSerializer(many=True)
     class Meta:
         model = Match
-        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers')
+        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers', 'players')
         depth = 1
 
 class CreateMatchSerializer(serializers.ModelSerializer):
@@ -22,6 +27,8 @@ class CreateGolferMatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = GolferMatch
         fields = ['id', 'golfer', 'match', 'is_initiator']
+
+
 
 
 class MatchView(ViewSet):
