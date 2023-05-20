@@ -11,9 +11,14 @@ class MyMatchesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
         fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers', 'players')
+class FriendSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Golfer
+        fields = ('id', 'full_name', 'my_matches')
 class GolferSerializer(serializers.ModelSerializer):
     """serializer for golfer requests"""
     my_matches = MyMatchesSerializer(many=True)
+    friends = FriendSerializer(many=True)
     class Meta:
         model = Golfer
         fields = ('id', 'user', 'full_name',
