@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
 from rest_framework import routers
-from linkupapi.views import GolferView, CourseView, MatchView, MessageView, login_user, register_user
+from linkupapi.views import GolferView, CourseView, MatchView, MessageView, HoleScoreView, login_user, register_user
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'golfers', GolferView, 'golfer')
 router.register(r'courses', CourseView, 'course')
 router.register(r'matches', MatchView, 'match')
 router.register(r'messages', MessageView, 'message')
+router.register(r'scores', HoleScoreView, 'score')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register', register_user),
