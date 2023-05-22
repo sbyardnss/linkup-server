@@ -25,3 +25,15 @@ class HoleScoreView(ViewSet):
         hole_scores = HoleScore.objects.filter(match=match)
         serialized = HoleScoreSerializer(hole_scores, many=True)
         return Response(serialized.data, status=status.HTTP_200_OK)
+    def create(self, request):
+        scored_golfer = Golfer.objects.get(pk=request.data['golfer'])
+        scored_match = Match.objects.get(pk=request.data['match'])
+        serialized = CreateHoleScoreSerializer(data=request.data)
+        serialized.is_valid(raise_exception=True)
+        serialized.save(golfer=scored_golfer, match=scored_match)
+        return Response(serialized.data, status=status.HTTP_201_CREATED)
+    def update(self, request):
+        hole_score_to_change = HoleScore.objects.get(golfer__id=request.data['golfer'], match__id=request.data['match'])
+        hole_score_to_change.strokes = request.data['strokes']
+        hole_score_to_change.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
