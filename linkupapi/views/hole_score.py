@@ -13,7 +13,7 @@ class HoleScoreSerializer(serializers.ModelSerializer):
 class CreateHoleScoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = HoleScore
-        fields = ['id', 'golfer_match', 'strokes', 'course_hole', 'notes']
+        fields = ['id', 'golfer', 'match', 'strokes', 'course_hole', 'notes']
 
 class HoleScoreView(ViewSet):
     def list(self, request):
@@ -32,8 +32,8 @@ class HoleScoreView(ViewSet):
         serialized.is_valid(raise_exception=True)
         serialized.save(golfer=scored_golfer, match=scored_match)
         return Response(serialized.data, status=status.HTTP_201_CREATED)
-    def update(self, request):
-        hole_score_to_change = HoleScore.objects.get(golfer__id=request.data['golfer'], match__id=request.data['match'])
+    def update(self, request, pk):
+        hole_score_to_change = HoleScore.objects.get(pk=pk)
         hole_score_to_change.strokes = request.data['strokes']
         hole_score_to_change.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
