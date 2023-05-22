@@ -15,7 +15,7 @@ class MatchSerializer(serializers.ModelSerializer):
     golfers = GolferOnMatchSerializer(many=True)
     class Meta:
         model = Match
-        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers', 'joined', 'all_player_scores')
+        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers', 'joined')
         depth = 1
 
 class CreateMatchSerializer(serializers.ModelSerializer):

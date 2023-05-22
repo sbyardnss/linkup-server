@@ -1,2 +1,7 @@
-DELETE FROM authtoken_token
-Where user_id = 5 or user_id = 6 or user_id = 7
+UPDATE linkupapi_match
+SET date = "2023-05-18"
+WHERE date = "2023-06-18"
+
+UPDATE linkupapi_golfermatch
+SET golfer_id = 4
+WHERE golfer_id = 1

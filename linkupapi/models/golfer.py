@@ -10,6 +10,15 @@ class Golfer(models.Model):
         """full name custom property"""
         return f'{self.user.first_name} {self.user.last_name}'
     @property
+    def email(self):
+        return self.user.email
+    @property
+    def username(self):
+        return self.user.username
+    @property
+    def password(self):
+        return self.user.password
+    @property
     def is_friend(self):
         return self.__is_friend
     @is_friend.setter

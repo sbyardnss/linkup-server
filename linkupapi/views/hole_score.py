@@ -18,8 +18,10 @@ class CreateHoleScoreSerializer(serializers.ModelSerializer):
 class HoleScoreView(ViewSet):
     def list(self, request):
         # golfer = Golfer.objects.get(pk=request.data['golfer'])
-        match = Match.objects.get(pk=request.data['match'])
+        hole_scores = HoleScore.objects.all()
+        if "match" in request.query_params:
+            match = Match.objects.get(pk=request.query_params['match'])
+            hole_scores = hole_scores.filter(match=match)
         hole_scores = HoleScore.objects.filter(match=match)
         serialized = HoleScoreSerializer(hole_scores, many=True)
-        print(serialized.data)
         return Response(serialized.data, status=status.HTTP_200_OK)
