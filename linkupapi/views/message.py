@@ -24,14 +24,15 @@ class MessageView(ViewSet):
         serialized = MessageSerializer(messages, many=True)
         return Response(serialized.data, status=status.HTTP_200_OK)
     def create(self, request):
-        golfer = Golfer.objects.get(user=request.auth.user)
+        golfer = Golfer.objects.get(pk=request.data['sender'])
         message={
             'sender': golfer.id,
-            'recipient': request.data['recipientId'],
+            'recipient': request.data['recipient'],
             'message': request.data['message'],
-            'read': False,
-            'date_time': request.data['time']
+            'read': False
+            # 'date_time': request.data['date_time']
         }
+
         message = CreateMessageSerializer(data=message)
         message.is_valid(raise_exception=True)
         message.save()

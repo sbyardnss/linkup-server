@@ -5,3 +5,6 @@ WHERE date = "2023-06-18"
 UPDATE linkupapi_golfermatch
 SET golfer_id = 4
 WHERE golfer_id = 1
+
+DELETE from linkupapi_message
+Where id > 6
