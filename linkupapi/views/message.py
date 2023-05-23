@@ -37,3 +37,8 @@ class MessageView(ViewSet):
         message.is_valid(raise_exception=True)
         message.save()
         return Response(message.data, status=status.HTTP_201_CREATED)
+    def update(self, request, pk):
+        message = Message.objects.get(pk=pk)
+        message.read = request.data['read']
+        message.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
