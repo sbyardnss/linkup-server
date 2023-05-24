@@ -42,3 +42,9 @@ class MessageView(ViewSet):
         message.read = request.data['read']
         message.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+    @action(methods=['get'], detail=False)
+    def unread(self, request):
+        active_golfer = Golfer.objects.get(user=request.auth.user)
+        messages = Message.objects.filter(read=0, recipient=active_golfer.id)
+        serialized = MessageSerializer(messages, many=True)
+        return Response(serialized.data, status=status.HTTP_200_OK)
