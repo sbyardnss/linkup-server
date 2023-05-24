@@ -8,3 +8,6 @@ WHERE golfer_id = 1
 
 DELETE from linkupapi_message
 Where id > 6
+
+DELETE from linkupapi_holescore
+Where id > 87

@@ -54,7 +54,7 @@ class GolferView(ViewSet):
     def update(self, request, pk):
         golfer = Golfer.objects.get(pk=pk)
         golfer.user.username = request.data['username']
-        golfer.user.password = request.data['password']
+        golfer.user.set_password(request.data['password'])
         golfer.user.email = request.data['email']
         golfer.user.first_name = request.data['first_name']
         golfer.user.last_name = request.data['last_name']
