@@ -22,7 +22,7 @@ class GolferSerializer(serializers.ModelSerializer):
     class Meta:
         model = Golfer
         fields = ('id', 'user', 'full_name',
-                  'my_matches', 'followers', 'friends', 'is_friend', 'email', 'username', 'password')
+                  'my_matches', 'followers', 'friends', 'is_friend', 'email', 'username', 'password', 'first_name', 'last_name')
 # class CreateFriendshipSerializer(serializers.ModelSerializer):
 #     """serializer for creating friendships"""
 #     class Meta:
@@ -51,6 +51,16 @@ class GolferView(ViewSet):
                 user__email__exact=request.query_params['email'])
         serialized = GolferSerializer(golfers, many=True)
         return Response(serialized.data)
+    def update(self, request, pk):
+        golfer = Golfer.objects.get(pk=pk)
+        golfer.user.username = request.data['username']
+        golfer.user.password = request.data['password']
+        golfer.user.email = request.data['email']
+        golfer.user.first_name = request.data['first_name']
+        golfer.user.last_name = request.data['last_name']
+        golfer.user.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
     @action(methods=['post'], detail=True)
     def add_friend(self, request, pk):
         print("getting here")

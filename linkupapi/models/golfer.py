@@ -19,6 +19,12 @@ class Golfer(models.Model):
     def password(self):
         return self.user.password
     @property
+    def first_name(self):
+        return self.user.first_name
+    @property
+    def last_name(self):
+        return self.user.last_name
+    @property
     def is_friend(self):
         return self.__is_friend
     @is_friend.setter
