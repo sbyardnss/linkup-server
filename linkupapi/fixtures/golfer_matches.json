@@ -4,8 +4,7 @@
         "pk": 1,
         "fields": {
             "match": 1,
-            "golfer": 1,
-            "is_initiator": true
+            "golfer": 1
         }
     },
     {
@@ -13,8 +12,7 @@
         "pk": 2,
         "fields": {
             "match": 1,
-            "golfer": 2,
-            "is_initiator": false
+            "golfer": 2
         }
     }
 ]
