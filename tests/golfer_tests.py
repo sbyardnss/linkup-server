@@ -47,8 +47,8 @@ class GolferTests(APITestCase):
         # self.assertEqual(json_response['password'], password) 
 
     def test_add_friend(self):
-        golfer1 = self.golfer
-        golfer2 = self.golfer_2
+        golfer1 = self.golfer #user that is adding friend. 
+        golfer2 = self.golfer_2 #friend to be added
         golfer1.friends.set([])
         response = self.client.post(f'/golfers/{golfer2.id}/add_friend')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

@@ -24,9 +24,9 @@ class MatchTests(APITestCase):
         self.golfer_2.user = self.user2
         self.golfer_2.save()
 
-        self.match = Match.objects.first()
-
         self.course = Course.objects.create(name = "Two Rivers Golf Course", address = "2235 Two Rivers Pkwy, Nashville, TN 37214", phone_number = "(615) 889-2675")
+        self.match = Match.objects.create(course = self.course, date="2023-05-17", time="16:00:00", message="no message", creator=self.golfer_2)
+
         token = Token.objects.create(user=self.golfer.user)
         token2 = Token.objects.create(user=self.golfer_2.user)
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
@@ -50,3 +50,14 @@ class MatchTests(APITestCase):
         self.assertEqual(json_response['date'], data['date'])
         self.assertEqual(json_response['time'], data['time'])
         self.assertEqual(json_response['message'], data['message'])
+
+    def test_join_match(self):
+        match = self.match
+        match.golfers.set([self.golfer_2])
+        golfer = self.golfer
+        response = self.client.post(f'/matches/{match.id}/join_tee_time')
+        json_response=json.loads(response.content)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        response = self.client.get(f'/matches/{match.id}')
+        json_response=json.loads(response.content)
+        self.assertEqual(json_response['golfers'], [{"full_name": self.golfer_2.full_name, "id": self.golfer_2.id}, {"full_name": golfer.full_name, "id": golfer.id}])
