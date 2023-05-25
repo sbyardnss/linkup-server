@@ -12,6 +12,7 @@ class GolferOnMatchSerializer(serializers.ModelSerializer):
         fields = ('id', 'full_name')
 
 class MatchSerializer(serializers.ModelSerializer):
+    creator = GolferOnMatchSerializer(many=False)
     golfers = GolferOnMatchSerializer(many=True)
     class Meta:
         model = Match
