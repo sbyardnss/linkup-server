@@ -43,7 +43,7 @@ class GolferView(ViewSet):
         """handle list request for golfers"""
         active_golfer = Golfer.objects.get(user=request.auth.user)
         golfers = Golfer.objects.annotate(is_friend=Count('followers', filter=Q(followers=active_golfer)))
-        print(request)
+        # print(request)
         if "friends" in request.query_params:
             golfers = golfers.filter(friends=request.query_params['friends'])
         if "email" in request.query_params:
@@ -63,7 +63,6 @@ class GolferView(ViewSet):
 
     @action(methods=['post'], detail=True)
     def add_friend(self, request, pk):
-        print("getting here")
         golfer = Golfer.objects.get(user=request.auth.user)
         friend = Golfer.objects.get(pk=pk)
         golfer.friends.add(friend)

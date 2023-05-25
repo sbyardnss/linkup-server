@@ -24,10 +24,10 @@ class CreateMatchSerializer(serializers.ModelSerializer):
         fields = ['id', 'date', 'time', 'message']
 
 
-class CreateGolferMatchSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GolferMatch
-        fields = ['id', 'golfer', 'match', 'is_initiator']
+# class CreateGolferMatchSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = GolferMatch
+#         fields = ['id', 'golfer', 'match', 'is_initiator']
 
 
 class MatchView(ViewSet):
@@ -54,6 +54,7 @@ class MatchView(ViewSet):
         serialized = CreateMatchSerializer(data=request.data)
         serialized.is_valid(raise_exception=True)
         serialized.save(creator=golfer, course=course, golfers=[golfer])
+        print(serialized.data)
         return Response(serialized.data, status=status.HTTP_201_CREATED)
 
     def destroy(self, request, pk=None):
