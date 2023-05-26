@@ -56,8 +56,10 @@ REST_FRAMEWORK = {
 # THIS IS NEW
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'https://6470c208d361a40009ceab9e--visionary-treacle-0efacd.netlify.app'
 )
+# CORS_ORIGIN_ALLOW_ALL = True
 
 # UPDATE THIS
 MIDDLEWARE = [
