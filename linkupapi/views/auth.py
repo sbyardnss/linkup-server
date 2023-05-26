@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
+from rest_framework import status
 from linkupapi.models import Golfer
 
 
@@ -16,7 +16,7 @@ def login_user(request):
     Method arguments:
     request -- The full HTTP request object
     '''
-    print(request.data)
+    # print(request.data)
     username = request.data['username']
     password = request.data['password']
     # Use the built-in authenticate method to verify
@@ -31,11 +31,11 @@ def login_user(request):
             'token': token.key,
             'userId': golfer.id
         }
-        return Response(data)
+        return Response(data, status=status.HTTP_200_OK)
     else:
         # Bad login details were provided. So we can't log the user in.
         data = {'valid': False}
-        return Response(data)
+        return Response(data, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -68,4 +68,4 @@ def register_user(request):
         'token': token.key,
         'userId': golfer.id
     }
-    return Response(data)
+    return Response(data, status=status.HTTP_201_CREATED)
