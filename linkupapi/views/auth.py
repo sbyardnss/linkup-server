@@ -35,7 +35,7 @@ def login_user(request):
     else:
         # Bad login details were provided. So we can't log the user in.
         data = {'valid': False}
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
