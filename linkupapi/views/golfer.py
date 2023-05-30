@@ -8,32 +8,36 @@ from django.db.models import Count, Q
 from django.contrib.auth.models import User
 from linkupapi.models import Golfer, Match
 
+
 class MyMatchesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
-        fields = ('id', 'creator', 'course', 'date', 'time', 'message', 'golfers', 'players')
+        fields = ('id', 'creator', 'course', 'date',
+                  'time', 'message', 'golfers', 'players')
+
+
 class FriendSerializer(serializers.ModelSerializer):
     class Meta:
         model = Golfer
         fields = ('id', 'full_name', 'my_matches')
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('id', 'first_name', 'last_name')
+
+
+class GolferProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Golfer
+        fields = ('id', 'user', 'full_name', 'first_name',
+                  'last_name', 'email', 'username', 'password')
+
+
 class GolferSerializer(serializers.ModelSerializer):
     """serializer for golfer requests"""
     my_matches = MyMatchesSerializer(many=True)
     friends = FriendSerializer(many=True)
-    # user = UserSerializer(many=True)
+
     class Meta:
         model = Golfer
         fields = ('id', 'user', 'full_name',
                   'my_matches', 'followers', 'friends', 'is_friend', 'first_name', 'last_name')
-# class CreateFriendshipSerializer(serializers.ModelSerializer):
-#     """serializer for creating friendships"""
-#     class Meta:
-#         model = Friendship
-#         fields = ['id', 'golfer', 'friend', 'created_on']
 
 
 class GolferView(ViewSet):
@@ -48,7 +52,8 @@ class GolferView(ViewSet):
     def list(self, request):
         """handle list request for golfers"""
         active_golfer = Golfer.objects.get(user=request.auth.user)
-        golfers = Golfer.objects.annotate(is_friend=Count('followers', filter=Q(followers=active_golfer)))
+        golfers = Golfer.objects.annotate(is_friend=Count(
+            'followers', filter=Q(followers=active_golfer)))
         # print(request)
         if "friends" in request.query_params:
             golfers = golfers.filter(friends=request.query_params['friends'])
@@ -57,6 +62,7 @@ class GolferView(ViewSet):
                 user__email__exact=request.query_params['email'])
         serialized = GolferSerializer(golfers, many=True)
         return Response(serialized.data)
+
     def update(self, request, pk):
         golfer = Golfer.objects.get(pk=pk)
         golfer.user.username = request.data['username']
@@ -80,3 +86,9 @@ class GolferView(ViewSet):
         friend = Golfer.objects.get(pk=pk)
         golfer.friends.remove(friend)
         return Response({'message': 'friend removed'}, status=status.HTTP_204_NO_CONTENT)
+
+    @action(methods=['get'], detail=False)
+    def profile(self, request):
+        golfer = Golfer.objects.get(user=request.auth.user)
+        serialized = GolferProfileSerializer(golfer)
+        return Response(serialized.data, status=status.HTTP_200_OK)
