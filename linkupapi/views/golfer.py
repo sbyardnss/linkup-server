@@ -5,6 +5,7 @@ from rest_framework import serializers, status
 from rest_framework.decorators import action
 from datetime import datetime
 from django.db.models import Count, Q
+from django.contrib.auth.models import User
 from linkupapi.models import Golfer, Match
 
 class MyMatchesSerializer(serializers.ModelSerializer):
@@ -15,14 +16,19 @@ class FriendSerializer(serializers.ModelSerializer):
     class Meta:
         model = Golfer
         fields = ('id', 'full_name', 'my_matches')
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id')
 class GolferSerializer(serializers.ModelSerializer):
     """serializer for golfer requests"""
     my_matches = MyMatchesSerializer(many=True)
     friends = FriendSerializer(many=True)
+    user = UserSerializer(many=True)
     class Meta:
         model = Golfer
         fields = ('id', 'user', 'full_name',
-                  'my_matches', 'followers', 'friends', 'is_friend', 'email', 'username', 'password', 'first_name', 'last_name')
+                  'my_matches', 'followers', 'friends', 'is_friend', 'first_name', 'last_name')
 # class CreateFriendshipSerializer(serializers.ModelSerializer):
 #     """serializer for creating friendships"""
 #     class Meta:
