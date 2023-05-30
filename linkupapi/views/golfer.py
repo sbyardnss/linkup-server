@@ -16,15 +16,15 @@ class FriendSerializer(serializers.ModelSerializer):
     class Meta:
         model = Golfer
         fields = ('id', 'full_name', 'my_matches')
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'first_name', 'last_name')
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ('id', 'first_name', 'last_name')
 class GolferSerializer(serializers.ModelSerializer):
     """serializer for golfer requests"""
     my_matches = MyMatchesSerializer(many=True)
     friends = FriendSerializer(many=True)
-    user = UserSerializer(many=True)
+    # user = UserSerializer(many=True)
     class Meta:
         model = Golfer
         fields = ('id', 'user', 'full_name',
